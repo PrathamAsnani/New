@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💘</title>
+  <style>
+    body {
+      height: 100vh;
+      background: #ffe6eb;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    #yes {
+      padding: 14px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      background: #ff4d6d;
+      color: white;
+      margin-right: 20px;
+    }
+
+    #no {
+      padding: 14px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      background: #888;
+      color: white;
+      position: absolute;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <button id="yes" onclick="goYes()">Yes ❤️</button>
+  <button id="no">No 💔</button>
+
+  <script>
+    const noBtn = document.getElementById("no");
+
+    // start position
+    noBtn.style.left = "60%";
+    noBtn.style.top = "50%";
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+
+      const distanceX = e.clientX - (rect.left + rect.width / 2);
+      const distanceY = e.clientY - (rect.top + rect.height / 2);
+
+      const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+
+      // if cursor gets close, button RUNS
+      if (distance < 120) {
+        const moveX = (Math.random() - 0.5) * 400;
+        const moveY = (Math.random() - 0.5) * 400;
+
+        let newX = rect.left + moveX;
+        let newY = rect.top + moveY;
+
+        // keep inside screen
+        newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
+        newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
+
+        noBtn.style.left = newX + "px";
+        noBtn.style.top = newY + "px";
+      }
+    });
+
+    function goYes() {
+      window.location.href = "yes.html";
+    }
+  </script>
+
+</body>
+</html>
